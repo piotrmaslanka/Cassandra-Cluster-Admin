@@ -18,10 +18,15 @@
 										 'username' => '',
 										 'password' => ''));
 	*/
-	
-	$CASSANDRA_CLUSTERS = array(array('nodes' => array('127.0.0.1:9160'),
-								     'username' => '',
-								     'password' => ''));
+	$hosts = explode(',', $_ENV['HOSTS']);
+        $port = $_ENV['PORT'];
+        $hosts_p = array();
+	for ($host in $hosts) {
+		$hosts_p[] = $host.':'.$port;
+	}
+	$CASSANDRA_CLUSTERS = array(array('nodes' => $hosts_p,
+						     'username' => '',
+						     'password' => ''));
 	
 	/*
 		Read-only keyspace
